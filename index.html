@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tebak Angka</title>
+    <style>
+      body { font-family: sans-serif; max-width: 420px; margin: 0 auto; padding: 24px; text-align: center; background: #fdf6ec; color: #3b2a20; }
+      input { padding: 10px; font-size: 18px; width: 120px; text-align: center;}
+      button{ padding: 10px 18px; font-size: 18px; background: #6f4e37; color: white; border: none; border-radius: 8px; }
+      #pesan { margin-top: 20px; font-size: 20px; min-height: 30px; }
+      </style>
+  </head>
+  <body>
+    <h1>Tebak Angka</h1>
+    <p>Aku memilih angka 1 sampai 100. Coba tebak!</p>
+
+    <input type="number" id="tebakan">
+    <button onclick="cek()">Tebak</button>
+    <button onclick="ulang()">Main lagi</button>
+
+    <p id="pesan"></p>
+    <p id="percobaan">Percobaan: 0 dari 7</p>
+
+    <script>
+      let rahasia = Math.floor(Math.random() * 100) + 1;
+      let percobaan = 0;
+      let selesai = false;
+      const maksimal = 7;
+
+      function cek() {
+        let tebakan = Number(document.getElementById("tebakan").value);
+        let pesan = "";
+        if (selesai) {
+          return;
+        }
+        if (tebakan < 1 || tebakan > 100) {
+          document.getElementById("pesan").textContent = "Masukkan angka 1 sampai 100.";
+          return;
+        }
+        percobaan = percobaan + 1;
+        let selisih = Math.abs(tebakan - rahasia);
+        let petunjuk = "";
+        if (selisih <= 5) {
+          petunjuk = " Panas sekali!";
+        } else if (selisih <= 15) {
+          petunjuk = " Hangat.";
+        } else {
+          petunjuk = " Dingin.";
+        }
+        if (tebakan === rahasia) {
+          pesan = "Benar! Angkanya " + rahasia + ". Kamu butuh " + percobaan + " percobaan.";
+          selesai = true;
+        } else if (tebakan < rahasia) {
+          pesan = tebakan + " terlalu kecil. Coba lebih besar!" + petunjuk;
+        } else {
+          pesan = tebakan + " terlalu besar. Coba lebih kecil!" + petunjuk;
+        }
+
+        if (!selesai && percobaan >= maksimal) {
+          pesan = "Kesempatan habis! Angkanya " + rahasia + ". Tekan Main lagi.";
+          selesai = true;
+        }
+        document.getElementById("pesan").textContent = pesan;
+        document.getElementById("percobaan").textContent = "Percobaan: " + percobaan + " dari " + maksimal;
+      }
+
+      function ulang() {
+        selesai = false;
+        rahasia = Math.floor(Math.random() * 100) + 1;
+        percobaan = 0;
+        document.getElementById("pesan").textContent = "";
+        document.getElementById("percobaan").textContent = "Percobaan : 0 dari " + maksimal;
+        document.getElementById("tebakan").value = "";
+      }
+
+    </script>
+  </body>
+</html>
