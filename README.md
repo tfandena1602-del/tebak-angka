@@ -16,7 +16,6 @@ Game tebak angka sederhana yang berjalan di browser, dibuat dengan HTML, CSS, da
 - Batas 7 percobaan dengan penghitung percobaan
 - Petunjuk jarak panas / hangat / dingin
 - Validasi input (hanya angka 1 sampai 100)
-- Tampilan responsif di HP dan tablet
 
 ## Teknologi
 HTML, CSS, JavaScript
